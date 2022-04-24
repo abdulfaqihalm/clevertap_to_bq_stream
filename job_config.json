@@ -1,0 +1,29 @@
+{
+    "dev":{
+        "pipeline_options":{
+            "runner": "DirectRunner",
+            "project": "myinitproject-123",
+            "job_name": "test-beam-stream",
+            "streaming": true,
+            "temp_location": "gs://ct_export_temp_dataflow/",
+            "region": "asia-southeast2",
+            "max_num_workers":5
+        },
+        "dummy_input": "gs://notificaiton_gs/1644816320-1644829200-Add-to-cart-initiated-20220214-0-21.json.gz",
+        "output_table": "myinitproject-123:beam.beam_clevertap_stream"
+    },
+    "prod":{
+        "pipeline_options":{
+            "runner": "DataFlowRunner",
+            "project": "myinitproject-123",
+            "job_name": "test-beam-stream",
+            "streaming": true,
+            "temp_location": "gs://ct_export_temp_dataflow/",
+            "region": "asia-southeast2",
+            "max_num_workers":5
+        },
+        "input_pubsub": "projects/myinitproject-123/topics/notificaiton_gs_topic",
+        "blob_path": "gs://notificaiton_gs/{blob_name}",
+        "output_table": "myinitproject-123:beam.beam_clevertap_stream"
+    }
+}
