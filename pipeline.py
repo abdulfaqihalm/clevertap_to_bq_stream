@@ -115,7 +115,8 @@ def run(argv=None, save_main_session=True):
                 p 
                     | "Read from pub/sub topic" >> ReadFromPubSub(
                         topic=config["prod"]["input_pubsub"],
-                        with_attributes=True)
+                        with_attributes=True,
+                        id_label="objectId")
                     | "Take objectId" >> beam.ParDo(ReadPubSubObject(), config["prod"]["blob_path"]) 
             )
             
